@@ -1,0 +1,80 @@
+.main-card-area {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card-area {
+  background: #ffffff;
+  box-shadow: -2px -2px 2px rgba(4, 4, 21, 0.02),
+    2px 2px 2px rgba(4, 4, 21, 0.02);
+  border-radius: 7px;
+  padding: 20px 20px;
+}
+
+.total-balance-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total-balance-top span {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.card-middle {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding: 0 0 20px;
+  margin: 12px 0 20px;
+}
+
+.card-middle p {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+}
+
+.card-middle h2 {
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0;
+}
+
+.card-bottom-area {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-bottom-left p {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 0 5px;
+}
+
+.card-bottom-left h3 {
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+}
+
+.card-bottom-left {
+  text-align: center;
+}
+
+.card-bottom-right p {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 0 5px;
+}
+
+.card-bottom-right h3 {
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+}
+
+.card-bottom-right {
+  text-align: center;
+}

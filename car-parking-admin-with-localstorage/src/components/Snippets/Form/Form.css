@@ -1,0 +1,63 @@
+.form-area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px;
+}
+
+.form-field label {
+  margin: 0 0 13px;
+  color: rgba(4, 13, 23, 0.8);
+  font-size: 18px;
+}
+
+.form-field input {
+  height: 46px;
+  border: 1px solid #dcdddf;
+  border-radius: 7px;
+  padding: 0 15px;
+  font-size: 16px;
+  color: rgba(4, 13, 23, 0.8);
+}
+
+.form-field select {
+  height: 46px;
+  border: 1px solid #dcdddf;
+  border-radius: 7px;
+  padding: 0 15px;
+  font-size: 16px;
+  color: rgba(4, 13, 23, 0.8);
+}
+
+.form-field textarea {
+  border: 1px solid #dcdddf;
+  border-radius: 7px;
+  padding: 15px 15px;
+  font-size: 16px;
+  color: rgba(4, 13, 23, 0.8);
+}
+
+input:focus-visible {
+  outline-offset: 0;
+  outline: 1px solid #0666eb;
+}
+
+select:focus-visible {
+  outline-offset: 0;
+  outline: 1px solid #0666eb;
+}
+
+textarea:focus-visible {
+  outline-offset: 0;
+  outline: 1px solid #0666eb;
+}
+
+.form-button-area {
+  margin-top: 10px;
+  grid-column: 1;
+}

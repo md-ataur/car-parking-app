@@ -1,0 +1,88 @@
+.table-area {
+  height: 67vh;
+  overflow-y: scroll;
+}
+
+.table-header {
+  position: sticky;
+  top: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table thead {
+  height: 50px;
+  background: #f7fdfa;
+  font-weight: 500;
+  font-size: 15px;
+  color: rgba(4, 4, 21, 0.6);
+  padding: 10px 15px;
+}
+
+table thead th {
+  display: table-cell;
+  font-weight: 500;
+  text-align: left;
+  padding: 12px 20px;
+}
+
+table tbody td {
+  display: table-cell;
+  padding: 12px 20px;
+  text-align: left;
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(4, 4, 21, 0.6);
+  border-bottom: 0.6px solid rgba(4, 4, 21, 0.15);
+}
+
+table tbody tr:hover {
+  background: #fbfbfb;
+}
+
+/* button style start */
+.common-button {
+  cursor: pointer;
+  background: rgb(25, 184, 70);
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  text-align: center;
+  letter-spacing: 0.02em;
+  border-radius: 6px;
+  padding: 14px 20px;
+  transition: 0.3s;
+}
+
+.common-button:hover {
+  background: #0ea138;
+}
+
+.action-btn a.edit-icon {
+  color: #19b846;
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.edit-icon {
+  background: no-repeat;
+  border: none;
+  cursor: pointer;
+  color: #19b846;
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.delete-icon {
+  background: no-repeat;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ff0000;
+  padding: 0;
+}
+/* button style end */

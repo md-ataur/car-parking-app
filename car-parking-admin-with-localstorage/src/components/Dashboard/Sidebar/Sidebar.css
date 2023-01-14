@@ -1,0 +1,66 @@
+.sidebar {
+  width: 220px;
+  position: fixed;
+  padding: 0px 16px;
+  background-color: #ffff;
+  height: 100%;
+  left: 0;
+  z-index: 3;
+  overflow-y: scroll;
+  transition: all 0.1s ease-in-out;
+}
+
+.sidebar-closed {
+  width: 58px;
+  overflow: hidden;
+  transition: all 0.1s ease-in-out;
+}
+
+.sidebar-closed-menu {
+  display: none;
+}
+
+.menu-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.menu-list-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-list-left-text {
+  font-size: 18px;
+}
+
+.menu-list-left-icon {
+  font-size: 22px;
+  margin: 0px 8px 0 0;
+  display: flex;
+}
+
+.menu-active-class {
+  display: block;
+  color: #19b846;
+  border-radius: 7px;
+  background: #effaf2;
+  transition: all 0.05s ease-in-out;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #aeabab;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #e6e6e6;
+}
