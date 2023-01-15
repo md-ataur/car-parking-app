@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize.config');
 
 const Vehicle = sequelize.define('vehicle', {
@@ -10,6 +10,7 @@ const Vehicle = sequelize.define('vehicle', {
   },
   licenseNumber: {
     type: DataTypes.STRING,
+    unique: true,
     allowNull: false
   },
   firstName: {
@@ -20,28 +21,28 @@ const Vehicle = sequelize.define('vehicle', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  car_type: {
+  carType: {
     type: DataTypes.ENUM,
-    values: ['car', 'microbus', 'truck'],
+    values: ['car', 'microbus', 'truck']
   },
   charge: {
-    type: DataTypes.ENUM,
-    values: ['car_charge', 'microbus_charge', 'truck_charge'],
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
-  date_of_entry: {
+  entryDate: {
     type: DataTypes.DATEONLY,
     allowNull: false,
   },
-  date_of_exit: {
+  exitDate: {
     type: DataTypes.DATEONLY,
     allowNull: false,
   },
-  time_of_entry: {
-    type: DataTypes.DATE,
+  entryTime: {
+    type: DataTypes.TIME,
     allowNull: false,
   },
-  time_of_exit: {
-    type: DataTypes.DATE,
+  exitTime: {
+    type: DataTypes.TIME,
     allowNull: false,
   },
   status: {
@@ -49,7 +50,7 @@ const Vehicle = sequelize.define('vehicle', {
     allowNull: false,
   },
   address: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   }
 });
 
@@ -60,6 +61,6 @@ const Vehicle = sequelize.define('vehicle', {
   })
   .then((err) => {
     console.log(err)
-  });
- */
+  }); */
+
 module.exports = Vehicle;
