@@ -1,14 +1,29 @@
 const ApiError = require('../utils/ApiError');
 const { Vehicle } = require('../models');
 
+
+/**
+ * Get data
+ * @returns
+ */
+const getVehicles = async () => {
+  return await Vehicle.findAll({});
+}
+
+
+/**
+ * Add data
+ * @param {data}
+ * @returns
+ */
 const addVehicle = async (data) => {
-  /* try {
-    return await Vehicle.create({
+  const licenseNumberExists = await Vehicle.findOne({
+    where: {
       licenseNumber: data.license_number
-    });
-  } catch (error) {
-    throw new ApiError(6001, error.message);
-  } */
+    }
+  });
+
+  if (licenseNumberExists) throw new ApiError(6001, 'License number already exists');
 
   return await Vehicle.create({
     licenseNumber: data.license_number,
@@ -27,5 +42,6 @@ const addVehicle = async (data) => {
 };
 
 module.exports = {
+  getVehicles,
   addVehicle
 };
