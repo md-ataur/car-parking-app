@@ -6,7 +6,7 @@ const { Vehicle } = require('../models');
  * @returns
  */
 const getVehicles = async () => {
-  const vehicles = await Vehicle.findAll({});
+  const vehicles = await Vehicle.find({});
   if (vehicles.length > 0) {
     return vehicles;
   } else {
@@ -21,9 +21,7 @@ const getVehicles = async () => {
  */
 const addVehicle = async (data) => {
   const licenseNumberExists = await Vehicle.findOne({
-    where: {
-      licenseNumber: data.license_number
-    }
+    licenseNumber: data.license_number
   });
 
   if (licenseNumberExists)
@@ -49,20 +47,7 @@ const addVehicle = async (data) => {
  * @param {id}
  * @returns
  */
-const getVehicleById = async (id) => {
-  /* return await Vehicle.findOne({
-    where: {
-      id
-    }
-  }); */
-
-  const vehicle = await Vehicle.findByPk(id);
-  if (vehicle !== null) {
-    return vehicle;
-  } else {
-    throw new ApiError(6002, 'Not found!');
-  }
-};
+const getVehicleById = async (id) => Vehicle.findById(id);
 
 /**
  * Update date
@@ -71,7 +56,13 @@ const getVehicleById = async (id) => {
  * @returns
  */
 const updateVehicle = async (id, data) => {
-  const response = await Vehicle.update(
+  const vehicle = await getVehicleById(id);
+  if (!vehicle) {
+    throw new ApiError(6004, 'Nothing found to Update');
+  }
+
+  const response = await Vehicle.findByIdAndUpdate(
+    { _id: id },
     {
       licenseNumber: data.license_number,
       firstName: data.name,
@@ -85,16 +76,8 @@ const updateVehicle = async (id, data) => {
       status: data.status,
       address: data.address
     },
-    {
-      where: {
-        id
-      }
-    }
+    { new: true }
   );
-
-  if (response[0] === 0) {
-    throw new ApiError(6002, 'Nothing found to Update');
-  }
 
   return response;
 };
@@ -105,17 +88,12 @@ const updateVehicle = async (id, data) => {
  * @returns
  */
 const deleteVehicle = async (id) => {
-  const response = await Vehicle.destroy({
-    where: {
-      id
-    }
-  });
-
-  if (response === 0) {
+  const vehicle = await getVehicleById(id);
+  if (!vehicle) {
     throw new ApiError(6004, 'Nothing found to Delete');
   }
-
-  return response;
+  await vehicle.remove();
+  return vehicle;
 };
 
 module.exports = {

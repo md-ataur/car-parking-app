@@ -39,20 +39,6 @@ const addVehicle = async (req, res, next) => {
   }
 };
 
-const updateVehicle = async (req, res, next) => {
-  try {
-    console.log(req.params);
-    /* if (Number.isNaN(req.params.id)) {
-      return res.send(error(6001, 'Invalid vehicle id'));
-    } */
-    next();
-    // if (Number.isNaN(req.params.id)) throw new ApiError(6002, 'Invalid Settings ID');
-  } catch (err) {
-    return next(new ApiError(6002, err.message));
-  }
-};
-
 module.exports = {
-  addVehicle,
-  updateVehicle
+  addVehicle
 };

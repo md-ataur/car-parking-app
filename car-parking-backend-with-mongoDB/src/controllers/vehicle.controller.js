@@ -30,7 +30,13 @@ const addVehicle = async (req, res) => {
 const getVehicleById = async (req, res) => {
   try {
     const data = await vehicleService.getVehicleById(req.params.id);
-    res.status(httpStatus.OK).send(success(data, 'Vehicle found successfully'));
+    if (data !== null) {
+      res
+        .status(httpStatus.OK)
+        .send(success(data, 'Vehicle found successfully'));
+    } else {
+      res.send(error(6002, 'Not found'));
+    }
   } catch (err) {
     res.send(error(6002, err.message));
   }
