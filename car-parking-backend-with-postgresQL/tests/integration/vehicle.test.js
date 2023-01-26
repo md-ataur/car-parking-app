@@ -1,38 +1,38 @@
 const request = require('supertest');
-const httpStatus = require('http-status');
 const app = require('../../src/app');
-const db = require('../../src/config/db');
+const sequelize = require('../../src/config/sequelize.config');
 
 describe('Vehicle routes', () => {
   beforeAll(async () => {
-    await db;
+    await sequelize;
   });
 
   afterAll(async () => {
-    await db.close();
+    await sequelize.close();
   });
 
   describe('POST /v1/vehicles/add', () => {
     const fakeData = {
-      license_number: '7566',
+      license_number: '454',
       name: 'Rahim',
       phone: '+87878',
       vehicle_type: 'car',
       charge: 500,
-      entry_date: '2021-01-18T12:55:54.379+00:00',
-      exit_date: '2021-01-18T12:56:54.379+00:00',
-      entry_time: '2021-01-18T12:55:54.379+00:00',
-      exit_time: '2021-01-18T12:56:54.379+00:00',
+      entry_date: '2023-02-17',
+      exit_date: '2023-03-17',
+      entry_time: '11:00',
+      exit_time: '12:00',
       status: 'in',
       address: 'dahaka'
     };
 
     test('should return 201 if successfully data insert', async () => {
       const res = await request(app).post('/v1/vehicles/add').send(fakeData);
+      console.log(res.body);
       expect(res.statusCode).toBe(201);
-      expect(res.body.data).toHaveProperty('_id');
+      expect(res.body.data).toHaveProperty('id');
       expect(res.body.data).toMatchObject({
-        _id: expect.anything(),
+        id: expect.anything(),
         licenseNumber: fakeData.license_number,
         firstName: fakeData.name,
         phone: fakeData.phone,
@@ -58,12 +58,12 @@ describe('Vehicle routes', () => {
 
   describe('GET /v1/vehicles/:id', () => {
     test('should fetch a specific data by id', async () => {
-      const id = '63d00be156c0911a6323e3de';
+      const id = '2';
       const res = await request(app).get(`/v1/vehicles/${id}`);
       expect(res.statusCode).toBe(200);
-      expect(res.body.data).toHaveProperty('_id');
+      expect(res.body.data).toHaveProperty('id');
       expect(res.body.data).toMatchObject({
-        _id: expect.anything(),
+        id: expect.anything(),
         licenseNumber: expect.any(String),
         firstName: expect.any(String),
         phone: expect.any(String),
@@ -79,9 +79,9 @@ describe('Vehicle routes', () => {
     });
 
     test('should return empty object if data is not found', async () => {
-      const id = '63d00dfbfc9f2f558024ae3f';
+      const id = '50';
       const res = await request(app).get(`/v1/vehicles/${id}`);
-      expect(res.body.data).not.toHaveProperty('_id');
+      expect(res.body.data).not.toHaveProperty('id');
       expect(res.body.data).toMatchObject({});
     });
   });
@@ -93,39 +93,25 @@ describe('Vehicle routes', () => {
       phone: '+87878',
       vehicle_type: 'car',
       charge: 500,
-      entry_date: '2021-01-18T12:55:54.379+00:00',
-      exit_date: '2022-01-18T12:56:54.379+00:00',
-      entry_time: '2021-01-18T12:55:54.379+00:00',
-      exit_time: '2022-01-18T12:56:54.379+00:00',
+      entry_date: '2023-02-17',
+      exit_date: '2023-03-17',
+      entry_time: '11:00',
+      exit_time: '12:00',
       status: 'in',
       address: 'dahaka'
     };
 
     test('should return 200 if successfully data update', async () => {
-      const id = '63d00be156c0911a6323e3de';
+      const id = '3';
       const res = await request(app)
         .patch(`/v1/vehicles/update/${id}`)
         .send(fakeData);
+      expect(res.body.data).toContain(1);
       expect(res.statusCode).toBe(200);
-      expect(res.body.data).toHaveProperty('_id');
-      expect(res.body.data).toMatchObject({
-        _id: expect.anything(),
-        licenseNumber: fakeData.license_number,
-        firstName: fakeData.name,
-        phone: fakeData.phone,
-        vehicleType: fakeData.vehicle_type,
-        charge: fakeData.charge,
-        entryDate: expect.any(String),
-        exitDate: expect.any(String),
-        entryTime: expect.any(String),
-        exitTime: expect.any(String),
-        status: fakeData.status,
-        address: fakeData.address
-      });
     });
 
     test('should return 404 if data is not found to update', async () => {
-      const id = '63d00dfbfc9f2f558024ae3f';
+      const id = '40';
       const res = await request(app).patch(`/v1/vehicles/${id}`);
       expect(res.statusCode).toBe(404);
     });
@@ -133,16 +119,17 @@ describe('Vehicle routes', () => {
 
   describe('DELETE /v1/vehicles/:id', () => {
     test('should return 200 if data is delete', async () => {
-      const id = '63d0176227f4c9fd026c6f7d';
+      const id = '8';
       const res = await request(app).delete(`/v1/vehicles/${id}`);
       expect(res.statusCode).toBe(200);
+      expect(res.body.data).toBe(1);
     });
 
     test('should return 200 if data is not found to delete', async () => {
-      const id = '63d017897e74bb8e88571748';
+      const id = '50';
       const res = await request(app).delete(`/v1/vehicles/${id}`);
       expect(res.statusCode).toBe(200);
-      expect(res.body.data).not.toHaveProperty('_id');
+      expect(res.body.data).not.toHaveProperty('id');
       expect(res.body.data).toMatchObject({});
     });
   });

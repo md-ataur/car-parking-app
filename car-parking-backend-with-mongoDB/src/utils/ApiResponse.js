@@ -24,7 +24,7 @@ const success = (data = {}, message = '') => ({
  * @param   {string} message
  * @param   {number} statusCode
  */
-const error = (code, message = '') => ({
+const error = (message = '', code) => ({
   success: false,
   message,
   data: {},

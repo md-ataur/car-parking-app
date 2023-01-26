@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 const errorCode = {
   "0": "UnknownError",
-
   "6000": "Vehicles Get Error",
   "6001": "Vehicle Add Error",
   "6002": "Single Vehicle Get Error",

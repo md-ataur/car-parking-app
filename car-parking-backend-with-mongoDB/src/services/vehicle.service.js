@@ -1,4 +1,3 @@
-const ApiError = require('../utils/ApiError');
 const { Vehicle } = require('../models');
 
 /**
@@ -10,7 +9,7 @@ const getVehicles = async () => {
   if (vehicles.length > 0) {
     return vehicles;
   } else {
-    throw new ApiError(6000, 'Not found!');
+    throw new Error('Vehicles Not found!', { cause: 6000 });
   }
 };
 
@@ -25,7 +24,7 @@ const addVehicle = async (data) => {
   });
 
   if (licenseNumberExists)
-    throw new ApiError(6001, 'License number already exists');
+    throw new Error('License number already exists', { cause: 6001 });
 
   return await Vehicle.create({
     licenseNumber: data.license_number,
@@ -58,7 +57,7 @@ const getVehicleById = async (id) => Vehicle.findById(id);
 const updateVehicle = async (id, data) => {
   const vehicle = await getVehicleById(id);
   if (!vehicle) {
-    throw new ApiError(6004, 'Nothing found to Update');
+    throw new Error('Nothing found to Update', { cause: 6003 });
   }
 
   const response = await Vehicle.findByIdAndUpdate(
@@ -78,7 +77,6 @@ const updateVehicle = async (id, data) => {
     },
     { new: true }
   );
-
   return response;
 };
 
@@ -90,7 +88,7 @@ const updateVehicle = async (id, data) => {
 const deleteVehicle = async (id) => {
   const vehicle = await getVehicleById(id);
   if (!vehicle) {
-    throw new ApiError(6004, 'Nothing found to Delete');
+    throw new Error('Nothing found to Delete', { cause: 6004 });
   }
   await vehicle.remove();
   return vehicle;

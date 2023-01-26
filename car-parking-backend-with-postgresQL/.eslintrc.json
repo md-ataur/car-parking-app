@@ -20,6 +20,8 @@
     "prettier"
   ],
   "rules": {
+    "no-undef": "off",
+    "node/no-unpublished-require": "off",
     "default-param-last": "off",
     "no-else-return": "off",
     "no-return-await": "off",

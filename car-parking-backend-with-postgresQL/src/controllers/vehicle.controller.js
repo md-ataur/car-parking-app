@@ -10,7 +10,7 @@ const getVehicles = async (req, res) => {
       .status(httpStatus.OK)
       .send(success(data, 'Vehicles found successfully'));
   } catch (err) {
-    res.send(error(6000, err.message));
+    res.send(error(err.message, err.cause));
   }
 };
 
@@ -22,7 +22,7 @@ const addVehicle = async (req, res) => {
       .status(httpStatus.CREATED)
       .send(success(data, 'Vehicle added successfully'));
   } catch (err) {
-    res.send(error(6001, err.message));
+    res.send(error(err.message, err.cause));
   }
 };
 
@@ -32,7 +32,7 @@ const getVehicleById = async (req, res) => {
     const data = await vehicleService.getVehicleById(req.params.id);
     res.status(httpStatus.OK).send(success(data, 'Vehicle found successfully'));
   } catch (err) {
-    res.send(error(6002, err.message));
+    res.send(error(err.message, err.cause));
   }
 };
 
@@ -44,7 +44,7 @@ const updateVehicle = async (req, res) => {
       .status(httpStatus.OK)
       .send(success(data, 'Vehicle updated successfully'));
   } catch (err) {
-    res.send(error(6003, err.message));
+    res.send(error(err.message, err.cause));
   }
 };
 
@@ -56,7 +56,7 @@ const deleteVehicle = async (req, res) => {
       .status(httpStatus.OK)
       .send(success(data, 'Vehicle deleted successfully'));
   } catch (err) {
-    res.send(error(6004, err.message));
+    res.send(error(err.message, err.cause));
   }
 };
 
