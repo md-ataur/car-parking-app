@@ -20,7 +20,7 @@ const addVehicle = async (req, res) => {
     const data = await vehicleService.addVehicle(req.body);
     res
       .status(httpStatus.CREATED)
-      .send(success(data, 'Vehicle added successfully'));
+      .send(success(data, 'Vehicle successfully added'));
   } catch (err) {
     res.send(error(err.message, err.cause));
   }

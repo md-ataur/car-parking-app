@@ -1,0 +1,27 @@
+.form-button {
+  min-width: 120px;
+  padding: 15px 20px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 18px;
+  background: #666;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.form-button:hover {
+  background: #19b846;
+  transition: 0.3s;
+}
+
+.form-button:disabled {
+  background: rgba(254, 153, 0, 0.17);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.form-button:disabled:hover {
+  background: rgba(254, 153, 0, 0.17);
+}
