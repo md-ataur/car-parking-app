@@ -1,12 +1,15 @@
-/* eslint-disable indent */
 /* eslint-disable camelcase */
-import React, { useReducer } from 'react';
-import Button from '../Snippets/Form/Button/Button';
-import Form from '../Snippets/Form/Form';
-import TextArea from '../Snippets/Form/TextArea/TextArea';
-import TextInput from '../Snippets/Form/TextInput/TextInput';
-import TextSelect from '../Snippets/Form/TextSelect/TextSelect';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Button from '../../Snippets/Form/Button/Button';
+import Form from '../../Snippets/Form/Form';
+import TextArea from '../../Snippets/Form/TextArea/TextArea';
+import TextInput from '../../Snippets/Form/TextInput/TextInput';
+import TextSelect from '../../Snippets/Form/TextSelect/TextSelect';
 
+/**
+ * Interface declared
+ */
 interface Vehicle {
     license_number: string;
     name: string;
@@ -21,21 +24,13 @@ interface Vehicle {
     address: string;
 }
 
-interface State {
-    newData: Vehicle;
-    loading: boolean;
-    error: Error | null;
-    message: string | undefined;
-}
-
-interface Action {
-    type: 'SUBMIT' | 'SUCCESS' | 'ERROR';
-    payload?: any;
-    msg?: string;
-}
-
-const initialState: State = {
-    newData: {
+/**
+ * Function Component
+ * @returns
+ */
+const EditVehicle: React.FC = () => {
+    const { id } = useParams();
+    const [vehicle, setVehicle] = useState<Vehicle>({
         license_number: '',
         name: '',
         vehicle_type: '',
@@ -44,73 +39,68 @@ const initialState: State = {
         entry_time: '',
         exit_time: '',
         charge: 0,
-        status: 'in',
+        status: 'out',
         phone: '',
         address: ''
-    },
-    loading: false,
-    error: null,
-    message: ''
-};
-
-const reducer = (state: State, action: Action): State => {
-    switch (action.type) {
-        case 'SUBMIT':
-            return { ...state, loading: true };
-        case 'SUCCESS':
-            return {
-                ...state,
-                loading: false,
-                newData: action.payload,
-                message: action.msg
-            };
-        case 'ERROR':
-            return { ...state, loading: false, error: action.payload };
-        default:
-            return state;
-    }
-};
-
-const ReducerAddVehicle: React.FC = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    });
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [message, setMessage] = useState();
 
     /**
-     * Form submit handler
-     * @param e
+     * Update vehilce
+     * @param {*} e
      */
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const updateApi = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch({ type: 'SUBMIT' });
         try {
-            const response = await fetch('http://localhost:7000/v1/vehicles/add', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:7000/v1/vehicles/update/${Number(id)}`, {
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(state.newData)
+                body: JSON.stringify(vehicle)
             });
 
-            const responseData = await response.json();
+            const resData = await response.json();
 
-            if (responseData.success) {
-                dispatch({
-                    type: 'SUCCESS',
-                    payload: { ...initialState.newData },
-                    msg: responseData.message
-                });
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (resData.success) {
+                setMessage(resData.message);
             } else {
-                dispatch({
-                    type: 'SUCCESS',
-                    payload: { ...state.newData },
-                    msg: responseData.message
-                });
+                setMessage(resData.message);
             }
         } catch (error) {
-            dispatch({ type: 'ERROR', payload: error });
+            console.error(error);
         }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    /**
+     * Get vehicles
+     */
+    useEffect(() => {
+        setIsLoading(true);
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:7000/v1/vehicles/');
+            const resData = await response.json();
+            const singleVehicle = resData.data.find((data: any) => data.id === Number(id));
+            setVehicle({
+                license_number: singleVehicle.licenseNumber,
+                name: singleVehicle.firstName,
+                vehicle_type: singleVehicle.vehicleType,
+                entry_date: singleVehicle.entryDate,
+                exit_date: singleVehicle.exitDate,
+                entry_time: singleVehicle.entryTime,
+                exit_time: singleVehicle.exitTime,
+                charge: singleVehicle.charge,
+                status: singleVehicle.status,
+                phone: singleVehicle.phone,
+                address: singleVehicle.address
+            });
+        };
+        fetchData();
+        setIsLoading(false);
+    }, []);
 
     /**
      * OnChange Handler
@@ -119,34 +109,35 @@ const ReducerAddVehicle: React.FC = () => {
     const handleOnChange = (
         e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>
     ) => {
-        dispatch({
-            type: 'SUCCESS',
-            payload: { ...state.newData, [e.target.name]: e.target.value.trim() }
+        setVehicle({
+            ...vehicle,
+            [e.target.name]: e.target.value
         });
     };
 
     return (
         <div className="main-form-area">
-            <h2>Add Vehicle</h2>
-            {state.loading && <h3>Loading...</h3>}
-            {state.message && <h3 style={{ color: 'brown' }}>{state.message}</h3>}
+            <h2>Update Vehicle</h2>
+            {isLoading && <h3>Loading...</h3>}
+            {message && <h3 style={{ color: 'brown' }}>{message}</h3>}
 
-            <Form handleSubmit={handleSubmit} className="form-area">
+            <Form handleSubmit={updateApi} className="form-area">
                 <>
                     <TextInput
                         className=""
                         type="text"
                         handleOnChange={handleOnChange}
                         name="license_number"
-                        value={state.newData.license_number}
+                        value={vehicle?.license_number}
                         label="License Number"
                         required
                     />
-                    <TextSelect label="Vehical Type">
+                    <TextSelect label="Car Type">
                         <select
                             onChange={handleOnChange}
                             name="vehicle_type"
-                            value={state.newData?.vehicle_type}
+                            value={vehicle?.vehicle_type}
+                            required
                         >
                             <option value="">Select Car Type</option>
                             <option value="microbus">Microbus</option>
@@ -158,7 +149,7 @@ const ReducerAddVehicle: React.FC = () => {
                         type="date"
                         handleOnChange={handleOnChange}
                         name="entry_date"
-                        value={state.newData.entry_date}
+                        value={vehicle?.entry_date}
                         label="Entry Date"
                         required
                     />
@@ -166,7 +157,7 @@ const ReducerAddVehicle: React.FC = () => {
                         type="date"
                         handleOnChange={handleOnChange}
                         name="exit_date"
-                        value={state.newData.exit_date}
+                        value={vehicle?.exit_date}
                         label="Exit Date"
                         required
                     />
@@ -174,7 +165,7 @@ const ReducerAddVehicle: React.FC = () => {
                         type="text"
                         handleOnChange={handleOnChange}
                         name="name"
-                        value={state.newData.name}
+                        value={vehicle?.name}
                         label="Name"
                         required
                     />
@@ -182,7 +173,7 @@ const ReducerAddVehicle: React.FC = () => {
                         type="number"
                         handleOnChange={handleOnChange}
                         name="charge"
-                        value={state.newData.charge}
+                        value={vehicle?.charge}
                         label="Charge"
                         required
                     />
@@ -190,7 +181,7 @@ const ReducerAddVehicle: React.FC = () => {
                         type="time"
                         handleOnChange={handleOnChange}
                         name="entry_time"
-                        value={state.newData.entry_time}
+                        value={vehicle?.entry_time}
                         label="Entry Time"
                         required
                     />
@@ -198,33 +189,39 @@ const ReducerAddVehicle: React.FC = () => {
                         type="time"
                         handleOnChange={handleOnChange}
                         name="exit_time"
-                        value={state.newData.exit_time}
+                        value={vehicle?.exit_time}
                         label="Exit Time"
                         required
                     />
                     <TextArea
                         handleOnChange={handleOnChange}
                         name="phone"
-                        value={state.newData?.phone}
+                        value={vehicle?.phone}
                         label="Phone"
                     />
                     <TextArea
                         handleOnChange={handleOnChange}
                         name="address"
-                        value={state.newData?.address}
+                        value={vehicle?.address}
                         label="Address"
                     />
                     <div>
                         <input
                             type="radio"
                             onChange={handleOnChange}
-                            checked={state.newData?.status === 'in'}
+                            checked={vehicle?.status === 'in'}
                             value="in"
                             name="status"
                             required
                         />
                         In
-                        <input type="radio" onChange={handleOnChange} value="out" name="status" />
+                        <input
+                            type="radio"
+                            checked={vehicle?.status === 'out'}
+                            onChange={handleOnChange}
+                            value="out"
+                            name="status"
+                        />
                         Out
                     </div>
                     <div className="form-button-area">
@@ -236,4 +233,4 @@ const ReducerAddVehicle: React.FC = () => {
     );
 };
 
-export default ReducerAddVehicle;
+export default EditVehicle;

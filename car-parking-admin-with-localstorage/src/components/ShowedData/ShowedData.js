@@ -17,7 +17,6 @@ const ShowedData = () => {
         if (getData) {
             setVehicles(getData);
         }
-
         if (getData.length < 1) {
             setMessage('No data found');
         }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
@@ -7,45 +7,71 @@ import Table from '../Snippets/Table/Table';
 /**
  * Interface declared
  */
-interface Vehicle {
-    id: number;
-    licenseNumber: string;
-    firstName: string;
-    vehicleType: string;
-    entryDate: string;
-    exitDate: string;
-    entryTime: string;
-    exitTime: string;
-    charge: number;
-    phone: string;
-    status: string;
-    address: string;
+interface State {
+    data: any;
+    loading: boolean;
+    error: Error | null;
 }
+
+interface Action {
+    type: 'FETCH_INIT' | 'FETCH_SUCCESS' | 'FETCH_FAILURE' | 'DELETE';
+    payload?: any;
+}
+
+/**
+ * Initial state declared
+ */
+const initialState: State = {
+    data: null,
+    loading: false,
+    error: null
+};
+
+/**
+ * Reducer callback function
+ * @param state
+ * @param action
+ * @returns state
+ */
+const reducer = (state: State, action: Action): State => {
+    switch (action.type) {
+        case 'FETCH_INIT':
+            return { ...state, loading: true, error: null };
+        case 'FETCH_SUCCESS':
+            return { ...state, loading: false, data: action.payload };
+        case 'DELETE':
+            return { ...state, loading: false, data: action.payload };
+        case 'FETCH_FAILURE':
+            return { ...state, loading: false, error: action.payload };
+        default:
+            throw new Error();
+    }
+};
 
 /**
  * Function Component
  * @returns
  */
-const ShowedData: React.FC = () => {
-    const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [message, setMessage] = useState<string>();
+const ReducerShowedData: React.FC = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     /**
      * Get Api for fetching data
      */
     useEffect(() => {
-        setIsLoading(true);
         const fetchData = async () => {
-            const response = await fetch('http://localhost:7000/v1/vehicles/');
-            const resData = await response.json();
-            setVehicles(resData.data);
-            if (resData.data.length < 1) {
-                setMessage('No data found');
+            dispatch({ type: 'FETCH_INIT' });
+            try {
+                const response = await fetch('http://localhost:7000/v1/vehicles/');
+                const resData = await response.json();
+                if (resData.success) {
+                    dispatch({ type: 'FETCH_SUCCESS', payload: resData.data });
+                }
+            } catch (error) {
+                dispatch({ type: 'FETCH_FAILURE', payload: error });
             }
         };
         fetchData();
-        setIsLoading(false);
     }, []);
 
     /**
@@ -63,8 +89,8 @@ const ShowedData: React.FC = () => {
                 const resData = await response.json();
 
                 if (resData.success) {
-                    const restData = vehicles.filter((vehicle) => vehicle.id !== id);
-                    setVehicles(restData);
+                    const restData = state.data.filter((vehicle: any) => vehicle.id !== id);
+                    dispatch({ type: 'DELETE', payload: restData });
                 }
             } catch (error) {
                 console.error(error);
@@ -76,8 +102,8 @@ const ShowedData: React.FC = () => {
      * Custom fields
      */
     let fields;
-    if (vehicles) {
-        fields = vehicles?.map((vehicle) => (
+    if (state.data) {
+        fields = state.data?.map((vehicle: any) => (
             <tr key={vehicle.id}>
                 <td>{vehicle.licenseNumber}</td>
                 <td>{vehicle.firstName}</td>
@@ -122,17 +148,12 @@ const ShowedData: React.FC = () => {
         <div className="main-area">
             <div className="table-main-box">
                 <div className="table-top-title">
-                    {!message && (
-                        <div>
-                            <h2>Parking List</h2>
-                        </div>
-                    )}
-                    {message && <h2>{message}</h2>}
+                    {state.data !== null ? <h2>Parking List</h2> : <h2>Not Found</h2>}
                 </div>
-                <Table isLoading={isLoading} fields={fields} columns={columns} />
+                <Table isLoading={state.loading} fields={fields} columns={columns} />
             </div>
         </div>
     );
 };
 
-export default ShowedData;
+export default ReducerShowedData;

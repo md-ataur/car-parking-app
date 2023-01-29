@@ -52,7 +52,7 @@
       "single"
     ],
     "no-duplicate-imports": "error",
-    "indent": "error",
+    "indent": ["error", 4, { "SwitchCase": 1 }],
     "react/function-component-definition": [
       "error",
       {

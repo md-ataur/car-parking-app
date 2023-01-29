@@ -1,11 +1,14 @@
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
-import Button from '../Snippets/Form/Button/Button';
-import Form from '../Snippets/Form/Form';
-import TextArea from '../Snippets/Form/TextArea/TextArea';
-import TextInput from '../Snippets/Form/TextInput/TextInput';
-import TextSelect from '../Snippets/Form/TextSelect/TextSelect';
+import Button from '../../Snippets/Form/Button/Button';
+import Form from '../../Snippets/Form/Form';
+import TextArea from '../../Snippets/Form/TextArea/TextArea';
+import TextInput from '../../Snippets/Form/TextInput/TextInput';
+import TextSelect from '../../Snippets/Form/TextSelect/TextSelect';
 
+/**
+ * Interface declared
+ */
 interface Vehicle {
     license_number: string;
     name: string;
@@ -20,6 +23,10 @@ interface Vehicle {
     address: string;
 }
 
+/**
+ * Function Component
+ * @returns
+ */
 const AddVehicle: React.FC = () => {
     const [vehicleInfo, setVehicleInfo] = useState<Vehicle>({
         license_number: '',
@@ -38,9 +45,11 @@ const AddVehicle: React.FC = () => {
     const [message, setMessage] = useState();
 
     /**
-     * Post api for adding
+     * Add api for adding vehicle
+     * @param e
      */
-    const addApi = async () => {
+    const addApi = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setIsLoading(true);
         try {
             const response = fetch('http://localhost:7000/v1/vehicles/add', {
@@ -51,40 +60,30 @@ const AddVehicle: React.FC = () => {
                 body: JSON.stringify(vehicleInfo)
             });
 
-            const responseData = await (await response).json();
+            const resData = await (await response).json();
 
-            if ((await response).ok) {
-                setMessage(responseData.message);
+            if (resData.success) {
+                setMessage(resData.message);
+                setVehicleInfo({
+                    license_number: '',
+                    vehicle_type: '',
+                    name: '',
+                    status: 'in',
+                    entry_date: '',
+                    exit_date: '',
+                    entry_time: '',
+                    exit_time: '',
+                    charge: 0,
+                    phone: '',
+                    address: ''
+                });
             } else {
-                setMessage(responseData.message);
+                setMessage(resData.message);
             }
         } catch (error) {
             console.error('Error:', error);
         }
         setIsLoading(false);
-    };
-
-    /**
-     * Form submit handler
-     * @param e
-     */
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        addApi();
-        setVehicleInfo({
-            license_number: '',
-            vehicle_type: '',
-            name: '',
-            status: 'in',
-            entry_date: '',
-            exit_date: '',
-            entry_time: '',
-            exit_time: '',
-            charge: 0,
-            phone: '',
-            address: ''
-        });
-
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -97,7 +96,7 @@ const AddVehicle: React.FC = () => {
     ) => {
         setVehicleInfo({
             ...vehicleInfo,
-            [e.target.name]: e.target.value.trim()
+            [e.target.name]: e.target.value
         });
     };
 
@@ -107,7 +106,7 @@ const AddVehicle: React.FC = () => {
             {isLoading && <h3>Loading...</h3>}
             {message && <h3 style={{ color: 'brown' }}>{message}</h3>}
 
-            <Form handleSubmit={handleSubmit} className="form-area">
+            <Form handleSubmit={addApi} className="form-area">
                 <>
                     {/* <input type="text" onChange={handleOnChange} name="name" value={vehicleInfo.name} /> */}
                     <TextInput
@@ -184,7 +183,7 @@ const AddVehicle: React.FC = () => {
                         handleOnChange={handleOnChange}
                         name="phone"
                         value={vehicleInfo?.phone}
-                        label="phone"
+                        label="Phone"
                     />
                     <TextArea
                         handleOnChange={handleOnChange}

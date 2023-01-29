@@ -1,6 +1,5 @@
 import React from 'react';
 import './Button.css';
-
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
     children: string | JSX.Element;

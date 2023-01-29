@@ -65,7 +65,7 @@ const getVehicleById = async (id) => {
 };
 
 /**
- * Update date
+ * Update data
  * @param {id}
  * @param {data}
  * @returns
