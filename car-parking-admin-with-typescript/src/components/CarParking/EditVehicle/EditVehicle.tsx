@@ -60,7 +60,6 @@ const EditVehicle: React.FC = () => {
                 },
                 body: JSON.stringify(vehicle)
             });
-
             const resData = await response.json();
 
             if (resData.success) {
@@ -76,27 +75,29 @@ const EditVehicle: React.FC = () => {
     };
 
     /**
-     * Get vehicles
+     * Get vehicle
      */
     useEffect(() => {
         setIsLoading(true);
         const fetchData = async () => {
-            const response = await fetch('http://localhost:7000/v1/vehicles/');
+            const response = await fetch(`http://localhost:7000/v1/vehicles/${id}`);
             const resData = await response.json();
-            const singleVehicle = resData.data.find((data: any) => data.id === Number(id));
-            setVehicle({
-                license_number: singleVehicle.licenseNumber,
-                name: singleVehicle.firstName,
-                vehicle_type: singleVehicle.vehicleType,
-                entry_date: singleVehicle.entryDate,
-                exit_date: singleVehicle.exitDate,
-                entry_time: singleVehicle.entryTime,
-                exit_time: singleVehicle.exitTime,
-                charge: singleVehicle.charge,
-                status: singleVehicle.status,
-                phone: singleVehicle.phone,
-                address: singleVehicle.address
-            });
+            if (resData.success) {
+                const singleVehicle = resData.data;
+                setVehicle({
+                    license_number: singleVehicle.licenseNumber,
+                    name: singleVehicle.firstName,
+                    vehicle_type: singleVehicle.vehicleType,
+                    entry_date: singleVehicle.entryDate,
+                    exit_date: singleVehicle.exitDate,
+                    entry_time: singleVehicle.entryTime,
+                    exit_time: singleVehicle.exitTime,
+                    charge: singleVehicle.charge,
+                    status: singleVehicle.status,
+                    phone: singleVehicle.phone,
+                    address: singleVehicle.address
+                });
+            }
         };
         fetchData();
         setIsLoading(false);

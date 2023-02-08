@@ -8,17 +8,17 @@ import './Sidebar.css';
 const Sidebar = ({ isSideMenuOpen }: { isSideMenuOpen: boolean }) => {
     return (
         <div className={!isSideMenuOpen ? 'sidebar-closed sidebar' : 'sidebar'}>
-            <div className='nav-menu'>
+            <div className="nav-menu">
                 <NavLink
-                    to=''
+                    to=""
                     end
                     className={({ isActive }) =>
                         isActive ? 'menu-active-class' : 'no-active-class'
                     }
                 >
-                    <div className='menu-list'>
-                        <div className='menu-list-left'>
-                            <span className='menu-list-left-icon'>
+                    <div className="menu-list">
+                        <div className="menu-list-left">
+                            <span className="menu-list-left-icon">
                                 <BiCategory />
                             </span>
                             <span
@@ -32,14 +32,14 @@ const Sidebar = ({ isSideMenuOpen }: { isSideMenuOpen: boolean }) => {
                     </div>
                 </NavLink>
                 <NavLink
-                    to='list'
+                    to="list"
                     className={({ isActive }) =>
                         isActive ? 'menu-active-class' : 'no-active-class'
                     }
                 >
-                    <div className='menu-list '>
-                        <div className='menu-list-left'>
-                            <span className='menu-list-left-icon'>
+                    <div className="menu-list ">
+                        <div className="menu-list-left">
+                            <span className="menu-list-left-icon">
                                 <IoCarSport />
                             </span>
                             <span
@@ -53,14 +53,14 @@ const Sidebar = ({ isSideMenuOpen }: { isSideMenuOpen: boolean }) => {
                     </div>
                 </NavLink>
                 <NavLink
-                    to='add'
+                    to="add"
                     className={({ isActive }) =>
                         isActive ? 'menu-active-class' : 'no-active-class'
                     }
                 >
-                    <div className='menu-list '>
-                        <div className='menu-list-left'>
-                            <span className='menu-list-left-icon'>
+                    <div className="menu-list ">
+                        <div className="menu-list-left">
+                            <span className="menu-list-left-icon">
                                 <AiFillCar />
                             </span>
                             <span

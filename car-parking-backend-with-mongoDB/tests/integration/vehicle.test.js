@@ -1,5 +1,4 @@
 const request = require('supertest');
-const httpStatus = require('http-status');
 const app = require('../../src/app');
 const db = require('../../src/config/db');
 
@@ -27,7 +26,7 @@ describe('Vehicle routes', () => {
       address: 'dahaka'
     };
 
-    test('should return 201 if successfully data insert', async () => {
+    test('should return 201 if successfully data inserted', async () => {
       const res = await request(app).post('/v1/vehicles/add').send(fakeData);
       expect(res.statusCode).toBe(201);
       expect(res.body.data).toHaveProperty('_id');
@@ -101,7 +100,7 @@ describe('Vehicle routes', () => {
       address: 'dahaka'
     };
 
-    test('should return 200 if successfully data update', async () => {
+    test('should return 200 if successfully data updated', async () => {
       const id = '63d00be156c0911a6323e3de';
       const res = await request(app)
         .patch(`/v1/vehicles/update/${id}`)
@@ -132,7 +131,7 @@ describe('Vehicle routes', () => {
   });
 
   describe('DELETE /v1/vehicles/:id', () => {
-    test('should return 200 if data is delete', async () => {
+    test('should return 200 if data is deleted', async () => {
       const id = '63d0176227f4c9fd026c6f7d';
       const res = await request(app).delete(`/v1/vehicles/${id}`);
       expect(res.statusCode).toBe(200);

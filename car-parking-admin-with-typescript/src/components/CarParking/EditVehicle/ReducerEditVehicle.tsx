@@ -108,7 +108,6 @@ const ReducerEditVehicle: React.FC = () => {
                 },
                 body: JSON.stringify(state.newData)
             });
-
             const resData = await response.json();
 
             if (resData.success) {

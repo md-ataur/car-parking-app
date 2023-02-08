@@ -26,7 +26,7 @@ describe('Vehicle routes', () => {
       address: 'dahaka'
     };
 
-    test('should return 201 if successfully data insert', async () => {
+    test('should return 201 if successfully data inserted', async () => {
       const res = await request(app).post('/v1/vehicles/add').send(fakeData);
       console.log(res.body);
       expect(res.statusCode).toBe(201);
@@ -101,7 +101,7 @@ describe('Vehicle routes', () => {
       address: 'dahaka'
     };
 
-    test('should return 200 if successfully data update', async () => {
+    test('should return 200 if successfully data updated', async () => {
       const id = '3';
       const res = await request(app)
         .patch(`/v1/vehicles/update/${id}`)
@@ -118,7 +118,7 @@ describe('Vehicle routes', () => {
   });
 
   describe('DELETE /v1/vehicles/:id', () => {
-    test('should return 200 if data is delete', async () => {
+    test('should return 200 if data is deleted', async () => {
       const id = '8';
       const res = await request(app).delete(`/v1/vehicles/${id}`);
       expect(res.statusCode).toBe(200);

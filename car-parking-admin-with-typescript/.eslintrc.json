@@ -25,6 +25,7 @@
     "prettier"
   ],
   "rules": {
+    "no-undef": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/button-has-type": "off",
     "import/no-extraneous-dependencies": "off",
@@ -52,7 +53,13 @@
       "single"
     ],
     "no-duplicate-imports": "error",
-    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "react/function-component-definition": [
       "error",
       {
@@ -70,6 +77,15 @@
         "allowArrowFunctions": true,
         "allowFunctions": true,
         "allowBind": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".tsx"
+        ]
       }
     ],
     "prettier/prettier": [

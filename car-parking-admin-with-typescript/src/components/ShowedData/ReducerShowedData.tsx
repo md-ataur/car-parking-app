@@ -85,7 +85,6 @@ const ReducerShowedData: React.FC = () => {
                 const response = await fetch(`http://localhost:7000/v1/vehicles/${id}`, {
                     method: 'DELETE'
                 });
-
                 const resData = await response.json();
 
                 if (resData.success) {

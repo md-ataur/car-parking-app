@@ -16,8 +16,8 @@ const Layout = () => {
         <>
             <Sidebar isSideMenuOpen={isSideMenuOpen} />
             <div className={!isSideMenuOpen ? 'side-menu-open dashboard' : 'dashboard'}>
-                <div className='dash-header'>
-                    <div className='menu-icon'>
+                <div className="dash-header">
+                    <div className="menu-icon">
                         <span>
                             <GrMenu onClick={setIsSideMenuOpenFunction} />
                         </span>

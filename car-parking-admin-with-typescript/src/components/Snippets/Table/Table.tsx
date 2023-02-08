@@ -13,7 +13,7 @@ const Table: React.FC<TableProps> = ({ isLoading, fields, columns }) => {
 
     return (
         <>
-            {isLoading && <p>Loading...</p>}
+            {isLoading && <p>Loading</p>}
             {!isLoading && (
                 <>
                     <div className="table-area">

@@ -59,7 +59,6 @@ const ShowedData: React.FC = () => {
                 const response = await fetch(`http://localhost:7000/v1/vehicles/${id}`, {
                     method: 'DELETE'
                 });
-
                 const resData = await response.json();
 
                 if (resData.success) {
@@ -124,10 +123,10 @@ const ShowedData: React.FC = () => {
                 <div className="table-top-title">
                     {!message && (
                         <div>
-                            <h2>Parking List</h2>
+                            <h2 data-testid="heading">Parking List</h2>
                         </div>
                     )}
-                    {message && <h2>{message}</h2>}
+                    {message && <h2 data-testid="heading">{message}</h2>}
                 </div>
                 <Table isLoading={isLoading} fields={fields} columns={columns} />
             </div>
