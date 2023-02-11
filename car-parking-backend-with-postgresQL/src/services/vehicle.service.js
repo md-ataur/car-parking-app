@@ -1,4 +1,4 @@
-const { Vehicle } = require('../models');
+const { Vehicle } = require("../models");
 
 /**
  * Get all data
@@ -9,7 +9,7 @@ const getVehicles = async () => {
   if (vehicles.length > 0) {
     return vehicles;
   } else {
-    throw new Error('Vehicles Not found!', { cause: 6000 });
+    throw new Error("Vehicles Not found!", { cause: 6000 });
   }
 };
 
@@ -21,13 +21,12 @@ const getVehicles = async () => {
 const addVehicle = async (data) => {
   const licenseNumberExists = await Vehicle.findOne({
     where: {
-      licenseNumber: data.license_number
-    }
+      licenseNumber: data.license_number,
+    },
   });
 
   // if (licenseNumberExists) throw new Error(6001);
-  if (licenseNumberExists)
-    throw new Error('License number already exists', { cause: 6001 });
+  if (licenseNumberExists) throw new Error("License number already exists", { cause: 6001 });
 
   return await Vehicle.create({
     licenseNumber: data.license_number,
@@ -40,7 +39,7 @@ const addVehicle = async (data) => {
     entryTime: data.entry_time,
     exitTime: data.exit_time,
     status: data.status,
-    address: data.address
+    address: data.address,
   });
 };
 
@@ -60,7 +59,7 @@ const getVehicleById = async (id) => {
   if (vehicle !== null) {
     return vehicle;
   } else {
-    throw new Error('Vehicle Not found', { cause: 6002 });
+    throw new Error("Vehicle Not found", { cause: 6002 });
   }
 };
 
@@ -73,7 +72,7 @@ const getVehicleById = async (id) => {
 const updateVehicle = async (id, data) => {
   const response = await Vehicle.update(
     {
-      licenseNumber: data.license_number,
+      icenseNumber: data.license_number,
       firstName: data.name,
       phone: data.phone,
       vehicleType: data.vehicle_type,
@@ -83,17 +82,17 @@ const updateVehicle = async (id, data) => {
       entryTime: data.entry_time,
       exitTime: data.exit_time,
       status: data.status,
-      address: data.address
+      address: data.address,
     },
     {
       where: {
-        id
-      }
+        id,
+      },
     }
   );
 
   if (response[0] === 0) {
-    throw new Error('Nothing found to Update', { cause: 6003 });
+    throw new Error("Nothing found to Update", { cause: 6003 });
   }
 
   return response;
@@ -107,12 +106,12 @@ const updateVehicle = async (id, data) => {
 const deleteVehicle = async (id) => {
   const response = await Vehicle.destroy({
     where: {
-      id
-    }
+      id,
+    },
   });
 
   if (response === 0) {
-    throw new Error('Nothing found to Delete', { cause: 6004 });
+    throw new Error("Nothing found to Delete", { cause: 6004 });
   }
 
   return response;
@@ -123,5 +122,5 @@ module.exports = {
   addVehicle,
   getVehicleById,
   updateVehicle,
-  deleteVehicle
+  deleteVehicle,
 };

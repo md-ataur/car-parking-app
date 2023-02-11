@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { todoController } = require('../../controllers');
+const { todoController } = require("../../controllers");
 
-router.get('/', todoController.getTodos);
+router.get("/", todoController.getTodos);
 
-router.post('/users', (req, res) => {
+router.post("/users", (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
     res.sendStatus(400);

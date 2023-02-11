@@ -1,9 +1,7 @@
 {
   "env": {
     "browser": true,
-    "node": true,
-    "es2021": true,
-    "jest": true
+    "es2021": true
   },
   "extends": [
     "airbnb",
@@ -18,8 +16,8 @@
   },
   "plugins": [
     "react",
-    "prettier",
-    "react-hooks"
+    "react-hooks",
+    "prettier"
   ],
   "rules": {
     "array-callback-return": "off",
@@ -39,10 +37,13 @@
     "no-unused-vars": "off",
     "react-hooks/rules-of-hooks": "error",
     "react/destructuring-assignment": "off",
-    "no-console": 0,
-    "react/state-in-constructor": 0,
-    "indent": 0,
-    "linebreak-style": 0,
+    "no-console": "off",
+    "react/state-in-constructor": "off",
+    "linebreak-style": "off",
+    "camelcase": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": [
       "error",
       {
@@ -74,16 +75,13 @@
     "prettier/prettier": [
       "error",
       {
-        "trailingComma": "none",
-        "singleQuote": true,
+        "trailingComma": "es5",
+        "singleQuote": false,
+        "tabWidth": 2,
         "printWidth": 100,
-        "tabWidth": 4,
         "semi": true,
         "endOfLine": "auto"
       }
-    ],
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off"
+    ]
   }
 }

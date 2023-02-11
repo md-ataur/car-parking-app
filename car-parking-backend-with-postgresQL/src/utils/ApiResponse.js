@@ -1,4 +1,4 @@
-const errorCode = require('./ErrorCodes');
+const errorCode = require("./ErrorCodes");
 
 /**
  * @desc    Send any success response
@@ -7,15 +7,15 @@ const errorCode = require('./ErrorCodes');
  * @param   {object | array} results
  * @param   {number} statusCode
  */
-const success = (data = {}, message = '') => ({
+const success = (data = {}, message = "") => ({
   success: true,
   message,
   data,
   error: {
     status: false,
     code: 0,
-    message: 'No Error'
-  }
+    message: "No Error",
+  },
 });
 
 /**
@@ -24,18 +24,18 @@ const success = (data = {}, message = '') => ({
  * @param   {string} message
  * @param   {number} statusCode
  */
-const error = (message = '', code) => ({
+const error = (message = "", code) => ({
   success: false,
   message,
   data: {},
   error: {
     status: true,
     code,
-    message: errorCode[code.toString()]
-  }
+    message: errorCode[code.toString()],
+  },
 });
 
 module.exports = {
   success,
-  error
+  error,
 };

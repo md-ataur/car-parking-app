@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 mongoose.connect(`mongodb://127.0.0.1:27017/vehilces_db`);
 
@@ -7,9 +7,9 @@ mongoose.connect(`mongodb://127.0.0.1:27017/vehilces_db`);
 ); */
 
 const database = mongoose.connection;
-database.on('error', console.error.bind(console, 'Connection error: '));
-database.once('open', () => {
-  console.log('Database connected successfully');
+database.on("error", console.error.bind(console, "Connection error: "));
+database.once("open", () => {
+  console.log("Database connected successfully");
 });
 
 module.exports = database;

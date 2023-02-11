@@ -1,1 +1,1 @@
-module.exports.vehicleService = require('./vehicle.service');
+module.exports.vehicleService = require("./vehicle.service");

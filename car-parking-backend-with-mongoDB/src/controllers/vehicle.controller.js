@@ -1,14 +1,12 @@
-const httpStatus = require('http-status');
-const { vehicleService } = require('../services');
-const { success, error } = require('../utils/ApiResponse');
+const httpStatus = require("http-status");
+const { vehicleService } = require("../services");
+const { success, error } = require("../utils/ApiResponse");
 
 // Get all data
 const getVehicles = async (req, res) => {
   try {
     const data = await vehicleService.getVehicles(req.body);
-    res
-      .status(httpStatus.OK)
-      .send(success(data, 'Vehicles found successfully'));
+    res.status(httpStatus.OK).send(success(data, "Vehicles found successfully"));
   } catch (err) {
     res.send(error(err.message, err.cause));
   }
@@ -18,9 +16,7 @@ const getVehicles = async (req, res) => {
 const addVehicle = async (req, res) => {
   try {
     const data = await vehicleService.addVehicle(req.body);
-    res
-      .status(httpStatus.CREATED)
-      .send(success(data, 'Vehicle added successfully'));
+    res.status(httpStatus.CREATED).send(success(data, "Vehicle added successfully"));
   } catch (err) {
     res.send(error(err.message, err.cause));
   }
@@ -31,11 +27,9 @@ const getVehicleById = async (req, res) => {
   try {
     const data = await vehicleService.getVehicleById(req.params.id);
     if (data !== null) {
-      res
-        .status(httpStatus.OK)
-        .send(success(data, 'Vehicle found successfully'));
+      res.status(httpStatus.OK).send(success(data, "Vehicle found successfully"));
     } else {
-      res.send(error('Not found', 6002));
+      res.send(error("Not found", 6002));
     }
   } catch (err) {
     res.send(error(err.message, err.cause));
@@ -46,9 +40,7 @@ const getVehicleById = async (req, res) => {
 const updateVehicle = async (req, res) => {
   try {
     const data = await vehicleService.updateVehicle(req.params.id, req.body);
-    res
-      .status(httpStatus.OK)
-      .send(success(data, 'Vehicle updated successfully'));
+    res.status(httpStatus.OK).send(success(data, "Vehicle updated successfully"));
   } catch (err) {
     res.send(error(err.message, err.cause));
   }
@@ -58,9 +50,7 @@ const updateVehicle = async (req, res) => {
 const deleteVehicle = async (req, res) => {
   try {
     const data = await vehicleService.deleteVehicle(req.params.id);
-    res
-      .status(httpStatus.OK)
-      .send(success(data, 'Vehicle deleted successfully'));
+    res.status(httpStatus.OK).send(success(data, "Vehicle deleted successfully"));
   } catch (err) {
     res.send(error(err.message, err.cause));
   }
@@ -71,5 +61,5 @@ module.exports = {
   addVehicle,
   getVehicleById,
   updateVehicle,
-  deleteVehicle
+  deleteVehicle,
 };

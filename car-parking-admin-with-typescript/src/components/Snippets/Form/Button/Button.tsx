@@ -1,16 +1,16 @@
-import React from 'react';
-import './Button.css';
+import React from "react";
+import "./Button.css";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    className?: string;
-    children: string | JSX.Element;
+  className?: string;
+  children: string | JSX.Element;
 }
 
 const Button: React.FC<ButtonProps> = ({ className, children, ...props }) => {
-    return (
-        <button {...props} className={`${className} form-button`}>
-            {children}
-        </button>
-    );
+  return (
+    <button {...props} className={`${className} form-button`}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

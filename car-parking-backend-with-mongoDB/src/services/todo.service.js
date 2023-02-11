@@ -1,6 +1,6 @@
 const todos = [
-  { id: 1, name: 'John Doe', completed: false },
-  { id: 2, name: 'Maria Doe', completed: true }
+  { id: 1, name: "John Doe", completed: false },
+  { id: 2, name: "Maria Doe", completed: true },
 ];
 
 const getTodos = () => {
@@ -10,5 +10,5 @@ const getTodos = () => {
 };
 
 module.exports = {
-  getTodos
+  getTodos,
 };

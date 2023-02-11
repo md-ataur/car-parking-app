@@ -1,1 +1,1 @@
-module.exports.vehicleController = require('./vehicle.controller');
+module.exports.vehicleController = require("./vehicle.controller");

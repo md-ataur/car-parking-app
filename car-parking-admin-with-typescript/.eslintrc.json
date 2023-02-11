@@ -1,8 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "node": true
+    "es2021": true
   },
   "extends": [
     "airbnb-typescript",
@@ -26,7 +25,10 @@
   ],
   "rules": {
     "no-undef": "off",
-    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "array-callback-return": "off",
+    "arrow-body-style": "off",
+    "prefer-const": "off",
     "react/button-has-type": "off",
     "import/no-extraneous-dependencies": "off",
     "import/extensions": "off",
@@ -44,22 +46,12 @@
     "no-console": "off",
     "react/state-in-constructor": "off",
     "linebreak-style": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-props-no-spreading": "off",
     "camelcase": "error",
     "spaced-comment": "error",
-    "quotes": [
-      "error",
-      "single"
-    ],
     "no-duplicate-imports": "error",
-    "indent": [
-      "error",
-      4,
-      {
-        "SwitchCase": 1
-      }
-    ],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": [
       "error",
       {
@@ -91,10 +83,10 @@
     "prettier/prettier": [
       "error",
       {
-        "trailingComma": "none",
-        "singleQuote": true,
+        "trailingComma": "es5",
+        "singleQuote": false,
+        "tabWidth": 2,
         "printWidth": 100,
-        "tabWidth": 4,
         "semi": true,
         "endOfLine": "auto"
       }

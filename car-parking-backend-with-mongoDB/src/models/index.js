@@ -1,1 +1,1 @@
-module.exports.Vehicle = require('./vehicle.model');
+module.exports.Vehicle = require("./vehicle.model");

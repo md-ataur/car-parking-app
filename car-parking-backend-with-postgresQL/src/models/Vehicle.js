@@ -1,57 +1,57 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize.config');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/sequelize.config");
 
-const Vehicle = sequelize.define('vehicle', {
+const Vehicle = sequelize.define("vehicle", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
   licenseNumber: {
     type: DataTypes.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   },
   firstName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   phone: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   vehicleType: {
     type: DataTypes.ENUM,
-    values: ['car', 'microbus', 'truck']
+    values: ["car", "microbus", "truck"],
   },
   charge: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   entryDate: {
     type: DataTypes.DATEONLY,
-    allowNull: false
+    allowNull: false,
   },
   exitDate: {
     type: DataTypes.DATEONLY,
-    allowNull: false
+    allowNull: false,
   },
   entryTime: {
     type: DataTypes.TIME,
-    allowNull: false
+    allowNull: false,
   },
   exitTime: {
     type: DataTypes.TIME,
-    allowNull: false
+    allowNull: false,
   },
   status: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   address: {
-    type: DataTypes.TEXT
-  }
+    type: DataTypes.TEXT,
+  },
 });
 
 /* Vehicle

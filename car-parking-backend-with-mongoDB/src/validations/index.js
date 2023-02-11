@@ -1,1 +1,1 @@
-module.exports.vehicleValidation = require('./vehicle.validation');
+module.exports.vehicleValidation = require("./vehicle.validation");

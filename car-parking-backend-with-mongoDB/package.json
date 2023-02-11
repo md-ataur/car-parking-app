@@ -8,10 +8,10 @@
     "dev": "nodemon src/index.js",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prettier": "prettier --check **/*.js",
-    "prettier:fix": "prettier --write **/*.js"
+    "lint": "eslint src/**/*.{js,ts}",
+    "lint:fix": "eslint --fix src/**/*.{js,ts}",
+    "format": "prettier --check **/*.{js,ts}",
+    "format:fix": "prettier --write src/**/*.{js,ts}"
   },
   "keywords": [],
   "author": "",
