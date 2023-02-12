@@ -1,6 +1,7 @@
+import React from "react";
 import "./Dashboard.css";
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   return (
     <div>
       <div className="main-card-area">

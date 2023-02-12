@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../../Snippets/Form/Button/Button";

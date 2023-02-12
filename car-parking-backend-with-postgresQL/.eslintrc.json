@@ -6,9 +6,9 @@
   },
   "extends": [
     "airbnb-base",
-    "prettier",
     "plugin:node/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+	  "prettier"
   ],
   "overrides": [],
   "parserOptions": {

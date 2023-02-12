@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
+import React from "react";
 import { AiFillCar } from "react-icons/ai";
 import { BiCategory } from "react-icons/bi";
 import { IoCarSport } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ isSideMenuOpen }: { isSideMenuOpen: boolean }) => {
+const Sidebar: React.FC<{ isSideMenuOpen: boolean }> = ({ isSideMenuOpen }) => {
   return (
     <div className={!isSideMenuOpen ? "sidebar-closed sidebar" : "sidebar"}>
       <div className="nav-menu">

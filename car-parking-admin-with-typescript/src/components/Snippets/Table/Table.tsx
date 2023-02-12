@@ -8,7 +8,7 @@ type TableProps = {
 };
 
 const Table: React.FC<TableProps> = ({ isLoading, fields, columns }) => {
-  const columnFields = columns.map((column: any) => <th key={column}>{column}</th>);
+  const columnFields = columns.map((column: string) => <th key={column}>{column}</th>);
   return (
     <>
       {isLoading && <p>Loading</p>}

@@ -8,6 +8,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
     "prettier"
   ],
   "overrides": [],
@@ -19,8 +20,8 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint",
     "react-hooks",
+    "@typescript-eslint",
     "prettier"
   ],
   "rules": {
@@ -33,10 +34,6 @@
     "import/no-extraneous-dependencies": "off",
     "import/extensions": "off",
     "import/no-cycle": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/anchor-has-content": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
     "no-useless-escape": "off",
     "no-underscore-dangle": "off",
     "no-unused-expressions": "off",
@@ -79,7 +76,7 @@
           ".tsx"
         ]
       }
-    ],
+    ]/* ,
     "prettier/prettier": [
       "error",
       {
@@ -90,7 +87,7 @@
         "semi": true,
         "endOfLine": "auto"
       }
-    ]
+    ] */
   },
   "settings": {
     "import/resolver": {

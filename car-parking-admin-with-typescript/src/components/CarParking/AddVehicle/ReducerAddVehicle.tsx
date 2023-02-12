@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable camelcase */
 import React, { useReducer } from "react";
 import Button from "../../Snippets/Form/Button/Button";

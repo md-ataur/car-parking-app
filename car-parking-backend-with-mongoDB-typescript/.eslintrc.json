@@ -5,9 +5,9 @@
   },
   "extends": [
     "standard-with-typescript",
-    "prettier",
+    "plugin:node/recommended",
     "plugin:prettier/recommended",
-    "plugin:node/recommended"
+    "prettier"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -40,16 +40,5 @@
     "class-methods-use-this": "off",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off"
-    /* "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": false,
-        "tabWidth": 2,
-        "printWidth": 100,
-        "semi": true,
-        "endOfLine": "auto"
-      }
-    ] */
   }
 }

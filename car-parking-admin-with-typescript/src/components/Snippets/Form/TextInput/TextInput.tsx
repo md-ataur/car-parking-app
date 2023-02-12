@@ -8,17 +8,19 @@ interface TextFieldProps {
   className?: string;
 }
 
-const TextInput = (props: TextFieldProps) => {
+const TextInput = ({
+  className,
+  handleOnChange,
+  label,
+  type,
+  name,
+  value,
+  required,
+}: TextFieldProps) => {
   return (
-    <div className={`${props?.className} form-field`}>
-      <label htmlFor={props?.label}>{props?.label}</label>
-      <input
-        type={props?.type}
-        onChange={props?.handleOnChange}
-        name={props?.name}
-        value={props?.value}
-        required={props?.required}
-      />
+    <div className={`${className} form-field`}>
+      <label htmlFor={label}>{label}</label>
+      <input type={type} onChange={handleOnChange} name={name} value={value} required={required} />
     </div>
   );
 };

@@ -6,8 +6,7 @@
 
 .card-area {
   background: #ffffff;
-  box-shadow: -2px -2px 2px rgba(4, 4, 21, 0.02),
-    2px 2px 2px rgba(4, 4, 21, 0.02);
+  box-shadow: -2px -2px 2px rgba(4, 4, 21, 0.02), 2px 2px 2px rgba(4, 4, 21, 0.02);
   border-radius: 7px;
   padding: 20px 20px;
 }

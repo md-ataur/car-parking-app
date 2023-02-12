@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useReducer } from "react";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -7,8 +8,23 @@ import Table from "../Snippets/Table/Table";
 /**
  * Interface declared
  */
+interface Vehicle {
+  id: number;
+  licenseNumber: string;
+  firstName: string;
+  vehicleType: string;
+  entryDate: string;
+  exitDate: string;
+  entryTime: string;
+  exitTime: string;
+  charge: number;
+  phone: string;
+  status: string;
+  address: string;
+}
+
 interface State {
-  data: any;
+  data: Vehicle[];
   loading: boolean;
   error: Error | null;
 }
@@ -22,7 +38,7 @@ interface Action {
  * Initial state declared
  */
 const initialState: State = {
-  data: null,
+  data: [],
   loading: false,
   error: null,
 };
@@ -88,7 +104,7 @@ const ReducerShowedData: React.FC = () => {
         const resData = await response.json();
 
         if (resData.success) {
-          const restData = state.data.filter((vehicle: any) => vehicle.id !== id);
+          const restData = state.data.filter((vehicle: Vehicle) => vehicle.id !== id);
           dispatch({ type: "DELETE", payload: restData });
         }
       } catch (error) {
@@ -102,7 +118,7 @@ const ReducerShowedData: React.FC = () => {
    */
   let fields;
   if (state.data) {
-    fields = state.data?.map((vehicle: any) => (
+    fields = state.data?.map((vehicle: Vehicle) => (
       <tr key={vehicle.id}>
         <td>{vehicle.licenseNumber}</td>
         <td>{vehicle.firstName}</td>

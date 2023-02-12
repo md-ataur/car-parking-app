@@ -5,7 +5,7 @@ import Search from "../../Snippets/Search/Search";
 import Sidebar from "../Sidebar/Sidebar";
 import "./Layout.css";
 
-const Layout = () => {
+const Layout: React.FC = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(true);
 
   const setIsSideMenuOpenFunction = () => {

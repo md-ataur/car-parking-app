@@ -1,7 +1,7 @@
 import "./Form.css";
 
 type FormProps = {
-  className: string;
+  className?: string;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   children: string | JSX.Element | JSX.Element[];
 };
