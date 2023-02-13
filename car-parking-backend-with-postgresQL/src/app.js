@@ -15,7 +15,7 @@ app.use(cors());
 app.options("*", cors());
 
 // Getting status of application and verison
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   const serverStatus = {
     name: "Car parking app",
     status: "UP",

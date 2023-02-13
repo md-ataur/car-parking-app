@@ -1,15 +1,12 @@
-import express, { type Application, type NextFunction, type Request, type Response } from "express";
+import dotenv from "dotenv";
+require("./config/db");
 
-// Boot express
-const app: Application = express();
-const port = 5000;
+dotenv.config();
 
-// Application routing
-app.use("/", (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send({ data: "Hello World!" });
-});
+import app from "./app";
+const port = process.env.PORT || 5000;
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}!`);
+  console.log(`Listening on port ${port}`);
 });

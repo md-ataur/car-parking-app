@@ -1,8 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const routes = require("./routes/v1");
+import express, { type Application, type NextFunction, type Request, type Response } from "express";
+import cors from "cors";
+import routes from "./routes/v1/index";
 
-const app = express();
+const app: Application = express();
 
 // parse json request body
 app.use(express.json());
@@ -15,12 +15,17 @@ app.use(cors());
 app.options("*", cors());
 
 // Getting status of application and version
-app.get("/", (req, res) => {
-  const serverStatus = {
+interface Status {
+  name: string;
+  status: string;
+  version: string;
+}
+
+app.get("/", (req: Request, res: Response) => {
+  const serverStatus: Status = {
     name: "Car parking app",
     status: "UP",
     version: "1.0.0",
-    date: "13 Jan 2023",
   };
   res.status(200).json(serverStatus);
 });
@@ -29,8 +34,8 @@ app.get("/", (req, res) => {
 app.use("/v1", routes);
 
 // send back a 404 error for any unknown api request
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(new Error("Not found"));
 });
 
-module.exports = app;
+export = app;
