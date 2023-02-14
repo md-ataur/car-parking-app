@@ -1,4 +1,4 @@
-import express, { type Application, type NextFunction, type Request, type Response } from "express";
+import express, { type Application, type Request, type Response, type NextFunction } from "express";
 import cors from "cors";
 import routes from "./routes/v1/index";
 
