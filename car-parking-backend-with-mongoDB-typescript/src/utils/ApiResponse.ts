@@ -22,12 +22,11 @@ export const success = (data = {}, message: string = "") => ({
  * @param   {string} message
  * @param   {number} statusCode
  */
-export const error = (message: string = "", code: number) => ({
+export const error = (message: string = "") => ({
   success: false,
   message,
   data: {},
   error: {
     status: true,
-    code,
   },
 });

@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
 const { todoController } = require("../../controllers");
 
+const router = express.Router();
 router.get("/", todoController.getTodos);
 
 router.post("/users", (req, res) => {

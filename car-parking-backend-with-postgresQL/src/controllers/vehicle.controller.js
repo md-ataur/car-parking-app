@@ -5,7 +5,7 @@ const { success, error } = require("../utils/ApiResponse");
 // Get all data
 const getVehicles = async (req, res) => {
   try {
-    const data = await vehicleService.getVehicles(req.body);
+    const data = await vehicleService.getVehicles();
     res.status(httpStatus.OK).send(success(data, "Vehicles found successfully"));
   } catch (err) {
     res.send(error(err.message, err.cause));

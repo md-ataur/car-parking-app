@@ -21,14 +21,15 @@
     "prettier"
   ],
   "rules": {
+    "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "node/no-missing-import": "off",
     "node/no-missing-require": "off",
-    // "import/first": "off",
     "arrow-body-style": "off",
-    "prefer-arrow-callback": "off"
+    "prefer-arrow-callback": "off",
+    "array-callback-return": "off"
   }
 }

@@ -8,9 +8,8 @@ const getVehicles = async () => {
   const vehicles = await Vehicle.find({});
   if (vehicles.length > 0) {
     return vehicles;
-  } else {
-    throw new Error("Vehicles Not found!", { cause: 6000 });
   }
+  throw new Error("Vehicles Not found!", { cause: 6000 });
 };
 
 /**
@@ -25,7 +24,7 @@ const addVehicle = async (data) => {
 
   if (licenseNumberExists) throw new Error("License number already exists", { cause: 6001 });
 
-  return await Vehicle.create({
+  const response = await Vehicle.create({
     licenseNumber: data.license_number,
     firstName: data.name,
     phone: data.phone,
@@ -38,6 +37,7 @@ const addVehicle = async (data) => {
     status: data.status,
     address: data.address,
   });
+  return response;
 };
 
 /**
@@ -45,7 +45,7 @@ const addVehicle = async (data) => {
  * @param {id}
  * @returns
  */
-const getVehicleById = async (id) => Vehicle.findById(id);
+const getVehicleById = async (id) => await Vehicle.findById(id);
 
 /**
  * Update date

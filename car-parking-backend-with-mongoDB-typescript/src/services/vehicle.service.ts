@@ -1,23 +1,6 @@
 import Vehicle from "../models";
+// import { type Types } from "mongoose";
 
-/**
- * Get all data
- * @returns
- */
-/* const getVehicles = async () => {
-  const vehicles = await Vehicle.find({});
-  if (vehicles.length > 0) {
-    return vehicles;
-  } else {
-    throw new Error("Vehicles Not found!", { cause: 6000 });
-  }
-}; */
-
-/**
- * Add data
- * @param {data}
- * @returns
- */
 interface IVehicle {
   licenseNumber: string;
   firstName: string;
@@ -32,6 +15,24 @@ interface IVehicle {
   address?: string;
 }
 
+/**
+ * Get all data
+ * @returns
+ */
+const getVehicles = async () /* : Promise<IVehicle> */ => {
+  const vehicles = await Vehicle.find({});
+  if (vehicles.length > 0) {
+    return vehicles;
+  } else {
+    throw new Error("Vehicles Not found!");
+  }
+};
+
+/**
+ * Add data
+ * @param {data}
+ * @returns
+ */
 const addVehicle = async (data: IVehicle): Promise<IVehicle> => {
   const licenseNumberExists = await Vehicle.findOne({
     licenseNumber: data.licenseNumber,
@@ -52,7 +53,6 @@ const addVehicle = async (data: IVehicle): Promise<IVehicle> => {
     status: data.status,
     address: data.address,
   });
-
   return response;
 };
 
@@ -61,7 +61,7 @@ const addVehicle = async (data: IVehicle): Promise<IVehicle> => {
  * @param {id}
  * @returns
  */
-// const getVehicleById = async (id) => Vehicle.findById(id);
+const getVehicleById = async (id: string) => await Vehicle.findById(id);
 
 /**
  * Update date
@@ -69,50 +69,50 @@ const addVehicle = async (data: IVehicle): Promise<IVehicle> => {
  * @param {data}
  * @returns
  */
-/* const updateVehicle = async (id, data) => {
+const updateVehicle = async (id: string, data: IVehicle) => {
   const vehicle = await getVehicleById(id);
   if (!vehicle) {
-    throw new Error("Nothing found to Update", { cause: 6003 });
+    throw new Error("Nothing found to Update");
   }
 
   const response = await Vehicle.findByIdAndUpdate(
     { _id: id },
     {
-      licenseNumber: data.license_number,
-      firstName: data.name,
+      licenseNumber: data.licenseNumber,
+      firstName: data.firstName,
       phone: data.phone,
-      vehicleType: data.vehicle_type,
+      vehicleType: data.vehicleType,
       charge: data.charge,
-      entryDate: data.entry_date,
-      exitDate: data.exit_date,
-      entryTime: data.entry_time,
-      exitTime: data.exit_time,
+      entryDate: data.entryDate,
+      exitDate: data.exitDate,
+      entryTime: data.entryTime,
+      exitTime: data.exitTime,
       status: data.status,
       address: data.address,
     },
     { new: true }
   );
   return response;
-}; */
+};
 
 /**
  * Delete data
  * @param {id}
  * @returns
  */
-/* const deleteVehicle = async (id) => {
+const deleteVehicle = async (id: string) => {
   const vehicle = await getVehicleById(id);
   if (!vehicle) {
-    throw new Error("Nothing found to Delete", { cause: 6004 });
+    throw new Error("Nothing found to Delete");
   }
   await vehicle.remove();
   return vehicle;
-}; */
+};
 
 export = {
-  // getVehicles,
+  getVehicles,
   addVehicle,
-  // getVehicleById,
-  // updateVehicle,
-  // deleteVehicle,
+  getVehicleById,
+  updateVehicle,
+  deleteVehicle,
 };
