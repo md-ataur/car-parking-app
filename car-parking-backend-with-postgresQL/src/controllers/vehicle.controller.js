@@ -8,7 +8,7 @@ const getVehicles = async (req, res) => {
     const data = await vehicleService.getVehicles();
     res.status(httpStatus.OK).send(success(data, "Vehicles found successfully"));
   } catch (err) {
-    res.send(error(err.message, err.cause));
+    res.send(error(err.message));
   }
 };
 
@@ -18,7 +18,7 @@ const addVehicle = async (req, res) => {
     const data = await vehicleService.addVehicle(req.body);
     res.status(httpStatus.CREATED).send(success(data, "Vehicle successfully added"));
   } catch (err) {
-    res.send(error(err.message, err.cause));
+    res.send(error(err.message));
   }
 };
 
@@ -28,7 +28,7 @@ const getVehicleById = async (req, res) => {
     const data = await vehicleService.getVehicleById(req.params.id);
     res.status(httpStatus.OK).send(success(data, "Vehicle found successfully"));
   } catch (err) {
-    res.send(error(err.message, err.cause));
+    res.send(error(err.message));
   }
 };
 
@@ -38,7 +38,7 @@ const updateVehicle = async (req, res) => {
     const data = await vehicleService.updateVehicle(req.params.id, req.body);
     res.status(httpStatus.OK).send(success(data, "Vehicle updated successfully"));
   } catch (err) {
-    res.send(error(err.message, err.cause));
+    res.send(error(err.message));
   }
 };
 
@@ -48,7 +48,7 @@ const deleteVehicle = async (req, res) => {
     const data = await vehicleService.deleteVehicle(req.params.id);
     res.status(httpStatus.OK).send(success(data, "Vehicle deleted successfully"));
   } catch (err) {
-    res.send(error(err.message, err.cause));
+    res.send(error(err.message));
   }
 };
 

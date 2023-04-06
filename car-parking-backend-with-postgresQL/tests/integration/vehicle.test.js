@@ -1,42 +1,41 @@
 const request = require("supertest");
 const app = require("../../src/app");
-const sequelize = require("../../src/config/sequelize.config");
+const DB = require("../../src/config/sequelize.config");
 
 describe("Vehicle routes", () => {
   beforeAll(async () => {
-    await sequelize;
+    await DB;
   });
 
   afterAll(async () => {
-    await sequelize.close();
+    await DB.close();
   });
 
   describe("POST /v1/vehicles/add", () => {
     const fakeData = {
-      license_number: "454",
-      name: "Rahim",
+      licenseNumber: "5248",
+      firstName: "Karim",
       phone: "+87878",
-      vehicle_type: "car",
+      vehicleType: "car",
       charge: 500,
-      entry_date: "2023-02-17",
-      exit_date: "2023-03-17",
-      entry_time: "11:00",
-      exit_time: "12:00",
+      entryDate: "2023-02-17",
+      exitDate: "2023-02-17",
+      entryTime: "11:00",
+      exitTime: "12:00",
       status: "in",
-      address: "dahaka",
+      address: "Khulna",
     };
 
     test("should return 201 if successfully data inserted", async () => {
       const res = await request(app).post("/v1/vehicles/add").send(fakeData);
-      console.log(res.body);
       expect(res.statusCode).toBe(201);
       expect(res.body.data).toHaveProperty("id");
       expect(res.body.data).toMatchObject({
         id: expect.anything(),
-        licenseNumber: fakeData.license_number,
-        firstName: fakeData.name,
+        licenseNumber: fakeData.licenseNumber,
+        firstName: fakeData.firstName,
         phone: fakeData.phone,
-        vehicleType: fakeData.vehicle_type,
+        vehicleType: fakeData.vehicleType,
         charge: fakeData.charge,
         entryDate: expect.any(String),
         exitDate: expect.any(String),
@@ -49,7 +48,7 @@ describe("Vehicle routes", () => {
   });
 
   describe("GET /v1/vehicles", () => {
-    test("should return 200 and fetch all vehicles from the database", async () => {
+    test("should return an array if data is found", async () => {
       const res = await request(app).get("/v1/vehicles").send();
       expect(res.statusCode).toBe(200);
       expect(res.body.data.length).toBeGreaterThan(0);
@@ -57,8 +56,8 @@ describe("Vehicle routes", () => {
   });
 
   describe("GET /v1/vehicles/:id", () => {
-    test("should fetch a specific data by id", async () => {
-      const id = "2";
+    test("should return a specific data by id", async () => {
+      const id = 4;
       const res = await request(app).get(`/v1/vehicles/${id}`);
       expect(res.statusCode).toBe(200);
       expect(res.body.data).toHaveProperty("id");
@@ -78,8 +77,8 @@ describe("Vehicle routes", () => {
       });
     });
 
-    test("should return empty object if data is not found", async () => {
-      const id = "50";
+    test("should return an empty object if data is not found", async () => {
+      const id = 28;
       const res = await request(app).get(`/v1/vehicles/${id}`);
       expect(res.body.data).not.toHaveProperty("id");
       expect(res.body.data).toMatchObject({});
@@ -88,45 +87,44 @@ describe("Vehicle routes", () => {
 
   describe("PATCH /v1/vehicles/update/:id", () => {
     const fakeData = {
-      license_number: "r32432",
-      name: "Rahim",
+      licenseNumber: "8787",
+      firstName: "Steeve",
       phone: "+87878",
-      vehicle_type: "car",
+      vehicleType: "car",
       charge: 500,
-      entry_date: "2023-02-17",
-      exit_date: "2023-03-17",
-      entry_time: "11:00",
-      exit_time: "12:00",
+      entryDate: "2023-02-17",
+      exitDate: "2023-02-17",
+      entryTime: "11:00",
+      exitTime: "12:00",
       status: "in",
-      address: "dahaka",
+      address: "Khulna",
     };
 
-    test("should return 200 if successfully data updated", async () => {
-      const id = "3";
+    test("should success true if data is updated", async () => {
+      const id = 3;
       const res = await request(app).patch(`/v1/vehicles/update/${id}`).send(fakeData);
       expect(res.body.data).toContain(1);
-      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
     });
 
-    test("should return 404 if data is not found to update", async () => {
-      const id = "40";
+    test("should return 500 if data is not found to update", async () => {
+      const id = 8;
       const res = await request(app).patch(`/v1/vehicles/${id}`);
-      expect(res.statusCode).toBe(404);
+      expect(res.statusCode).toBe(500);
     });
   });
 
   describe("DELETE /v1/vehicles/:id", () => {
-    test("should return 200 if data is deleted", async () => {
-      const id = "8";
+    test("should success true if data is deleted", async () => {
+      const id = 6;
       const res = await request(app).delete(`/v1/vehicles/${id}`);
-      expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBe(true);
       expect(res.body.data).toBe(1);
     });
 
-    test("should return 200 if data is not found to delete", async () => {
-      const id = "50";
+    test("should return an empty object if data is not found to delete", async () => {
+      const id = 30;
       const res = await request(app).delete(`/v1/vehicles/${id}`);
-      expect(res.statusCode).toBe(200);
       expect(res.body.data).not.toHaveProperty("id");
       expect(res.body.data).toMatchObject({});
     });

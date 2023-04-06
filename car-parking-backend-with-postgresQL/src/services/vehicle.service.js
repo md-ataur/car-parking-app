@@ -9,7 +9,7 @@ const getVehicles = async () => {
   if (vehicles.length > 0) {
     return vehicles;
   }
-  throw new Error("Vehicles Not found!", { cause: 6000 });
+  throw new Error("Vehicles Not found!");
 };
 
 /**
@@ -20,25 +20,26 @@ const getVehicles = async () => {
 const addVehicle = async (data) => {
   const licenseNumberExists = await Vehicle.findOne({
     where: {
-      licenseNumber: data.license_number,
+      licenseNumber: data.licenseNumber,
     },
   });
 
-  if (licenseNumberExists) throw new Error("License number already exists", { cause: 6001 });
+  if (licenseNumberExists) throw new Error("License number already exists");
 
   const response = await Vehicle.create({
-    licenseNumber: data.license_number,
-    firstName: data.name,
+    licenseNumber: data.licenseNumber,
+    firstName: data.firstName,
     phone: data.phone,
-    vehicleType: data.vehicle_type,
+    vehicleType: data.vehicleType,
     charge: data.charge,
-    entryDate: data.entry_date,
-    exitDate: data.exit_date,
-    entryTime: data.entry_time,
-    exitTime: data.exit_time,
+    entryDate: data.entryDate,
+    exitDate: data.exitDate,
+    entryTime: data.entryTime,
+    exitTime: data.exitTime,
     status: data.status,
     address: data.address,
   });
+
   return response;
 };
 
@@ -58,7 +59,7 @@ const getVehicleById = async (id) => {
   if (vehicle !== null) {
     return vehicle;
   }
-  throw new Error("Vehicle Not found", { cause: 6002 });
+  throw new Error("Vehicle Not found");
 };
 
 /**
@@ -70,15 +71,15 @@ const getVehicleById = async (id) => {
 const updateVehicle = async (id, data) => {
   const response = await Vehicle.update(
     {
-      icenseNumber: data.license_number,
-      firstName: data.name,
+      licenseNumber: data.licenseNumber,
+      firstName: data.firstName,
       phone: data.phone,
-      vehicleType: data.vehicle_type,
+      vehicleType: data.vehicleType,
       charge: data.charge,
-      entryDate: data.entry_date,
-      exitDate: data.exit_date,
-      entryTime: data.entry_time,
-      exitTime: data.exit_time,
+      entryDate: data.entryDate,
+      exitDate: data.exitDate,
+      entryTime: data.entryTime,
+      exitTime: data.exitTime,
       status: data.status,
       address: data.address,
     },
@@ -90,8 +91,9 @@ const updateVehicle = async (id, data) => {
   );
 
   if (response[0] === 0) {
-    throw new Error("Nothing found to Update", { cause: 6003 });
+    throw new Error("Nothing found to Update");
   }
+
   return response;
 };
 
@@ -108,8 +110,9 @@ const deleteVehicle = async (id) => {
   });
 
   if (response === 0) {
-    throw new Error("Nothing found to Delete", { cause: 6004 });
+    throw new Error("Nothing found to Delete");
   }
+
   return response;
 };
 

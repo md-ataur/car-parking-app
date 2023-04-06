@@ -17,34 +17,15 @@
   },
   "plugins": [
     "react",
-    "react-hooks",
     "prettier"
   ],
   "rules": {
-    "array-callback-return": "off",
-    "arrow-body-style": "off",
-    "prefer-const": "off",
-    "react/button-has-type": "off",
-    "import/no-extraneous-dependencies": "off",
-    "import/extensions": "off",
-    "import/no-cycle": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/anchor-has-content": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
-    "no-useless-escape": "off",
-    "no-underscore-dangle": "off",
-    "no-unused-expressions": "off",
-    "no-unused-vars": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react/destructuring-assignment": "off",
-    "no-console": "off",
-    "react/state-in-constructor": "off",
-    "linebreak-style": "off",
-    "camelcase": "error",
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+    "array-callback-return": "off",
     "react/function-component-definition": [
       "error",
       {
@@ -52,16 +33,6 @@
           "function-declaration",
           "arrow-function"
         ]
-      }
-    ],
-    "react/jsx-no-bind": [
-      "error",
-      {
-        "ignoreDOMComponents": true,
-        "ignoreRefs": true,
-        "allowArrowFunctions": true,
-        "allowFunctions": true,
-        "allowBind": true
       }
     ],
     "react/jsx-filename-extension": [
@@ -72,17 +43,6 @@
           ".jsx"
         ]
       }
-    ]/* ,
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": false,
-        "tabWidth": 2,
-        "printWidth": 100,
-        "semi": true,
-        "endOfLine": "auto"
-      }
-    ] */
+    ]
   }
 }

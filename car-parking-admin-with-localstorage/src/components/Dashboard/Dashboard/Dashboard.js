@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import React, { useEffect, useState } from "react";
 import { getFromDb } from "../../../db/local-storage";
 import DataPieChart from "../../Chart/DataPieChart";
@@ -16,7 +15,6 @@ const Dashboard = () => {
 
   const totalParked = vehicles?.filter((vehicle) => vehicle.status === "in");
   const emptySlot = vehicles?.filter((vehicle) => vehicle.status === "out");
-  const twoHours = vehicles?.find((vehicle) => vehicle.id === 76);
 
   const cars = vehicles?.filter((vehicle) => vehicle.car_type === "car" && vehicle.status === "in");
   const microbuses = vehicles?.filter(

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useState } from "react";
 import Button from "../../Snippets/Form/Button/Button";
 import Form from "../../Snippets/Form/Form";

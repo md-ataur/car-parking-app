@@ -14,13 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.options("*", cors());
 
-// Getting status of application and verison
+// Getting status of application and version
 app.get("/", (req, res) => {
   const serverStatus = {
     name: "Car parking app",
     status: "UP",
     version: "1.0.0",
-    date: "13 Jan 2023",
   };
   res.status(200).json(serverStatus);
 });

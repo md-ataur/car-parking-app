@@ -75,4 +75,4 @@ const vehicleSchema = new Schema<Vehicle>(
   { timestamps: true }
 );
 
-export = model<Vehicle>("tsvehicle", vehicleSchema);
+module.exports = model<Vehicle>("tsVehicle", vehicleSchema);

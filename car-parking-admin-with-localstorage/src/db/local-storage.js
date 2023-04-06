@@ -14,7 +14,7 @@ const getFromDb = () => {
 };
 
 /**
- * add data
+ * Add data
  * @param {*}
  */
 const addToDb = (data) => {
@@ -33,7 +33,7 @@ const addToDb = (data) => {
 };
 
 /**
- * delete data
+ * Delete data
  * @param {*} id
  * @returns
  */
@@ -48,7 +48,7 @@ const deleteDb = (id) => {
 };
 
 /**
- * clear localstorage
+ * Clear local storage
  */
 const clearDb = () => {
   localStorage.removeItem("vehicles");

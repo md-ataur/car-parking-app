@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { AiFillCar } from "react-icons/ai";
 import { BiCategory } from "react-icons/bi";

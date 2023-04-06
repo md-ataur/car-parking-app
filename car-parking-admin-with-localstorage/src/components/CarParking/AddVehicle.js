@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { addToDb, getFromDb } from "../../db/local-storage";
+import React, { useState } from "react";
+import { addToDb } from "../../db/local-storage";
 import Button from "../Snippets/Form/Button/Button";
 import Form from "../Snippets/Form/Form";
 import TextArea from "../Snippets/Form/TextArea/TextArea";
@@ -20,7 +20,7 @@ const AddVehicle = () => {
     charge: "",
     address: "",
   });
-  const [oldVehicleInfo, setOldVehicleInfo] = useState();
+
   const [message, setMessage] = useState();
 
   /**
@@ -53,16 +53,6 @@ const AddVehicle = () => {
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  /**
-   * Get vehicles
-   */
-  useEffect(() => {
-    const oldData = getFromDb();
-    if (oldData) {
-      setOldVehicleInfo(oldData);
-    }
-  }, [vehicleInfo]);
 
   return (
     <div className="main-form-area">

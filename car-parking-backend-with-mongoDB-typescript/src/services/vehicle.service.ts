@@ -1,5 +1,5 @@
-import Vehicle from "../models";
-// import { type Types } from "mongoose";
+/* eslint-disable @typescript-eslint/return-await */
+const { Vehicle } = require("../models");
 
 interface IVehicle {
   licenseNumber: string;
@@ -53,6 +53,7 @@ const addVehicle = async (data: IVehicle): Promise<IVehicle> => {
     status: data.status,
     address: data.address,
   });
+
   return response;
 };
 
@@ -92,6 +93,7 @@ const updateVehicle = async (id: string, data: IVehicle) => {
     },
     { new: true }
   );
+
   return response;
 };
 

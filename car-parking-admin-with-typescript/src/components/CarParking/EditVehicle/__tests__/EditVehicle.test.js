@@ -7,6 +7,7 @@ import {
   // waitForElement,
   act,
 } from "@testing-library/react";
+
 import apiCall from "../../../../api/api";
 
 describe("GET request for a single data", () => {

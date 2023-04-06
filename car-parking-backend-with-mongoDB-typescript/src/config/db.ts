@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 mongoose
-  .connect(`mongodb://127.0.0.1:27017/vehilces_db`)
+  .connect(`mongodb://127.0.0.1:27017/vehicleDB`)
   .then(() => {
-    console.log("Connected to database");
+    console.log("Database connected successfully");
   })
   .catch((error) => {
     console.error(error);

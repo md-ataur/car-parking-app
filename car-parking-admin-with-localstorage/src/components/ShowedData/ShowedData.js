@@ -38,6 +38,7 @@ const ShowedData = () => {
               <FiEdit />
             </Link>
             <button
+              type="button"
               onClick={() => {
                 deleteDb(vehicle.id);
                 setToggle(!toggle);
@@ -71,10 +72,14 @@ const ShowedData = () => {
               <h2>Parking List</h2>
             </div>
           )}
-
           {message && <h2>{message}</h2>}
         </div>
-        <Table isLoading={isLoading} fields={fields} columns={columns} />
+        <Table
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          fields={fields}
+          columns={columns}
+        />
       </div>
     </div>
   );

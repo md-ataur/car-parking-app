@@ -8,8 +8,8 @@ const getVehicles = async (req: Request, res: Response) => {
   try {
     const data = await vehicleService.getVehicles();
     res.status(200).send(success(data, "Vehicles found successfully"));
-  } catch (error: any) {
-    res.send(error(error.message));
+  } catch (err: any) {
+    res.send(error(err.message));
   }
 };
 

@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/sequelize.config");
+const DB = require("../config/sequelize.config");
 
-const Vehicle = sequelize.define("vehicle", {
+const Vehicle = DB.define("vehicle", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -54,13 +55,12 @@ const Vehicle = sequelize.define("vehicle", {
   },
 });
 
-/* Vehicle
-  .sync({ alter: true })
+/* Vehicle.sync({ alter: true })
   .then((result) => {
     console.log("The table for the Vehicle model was just (re)created!");
   })
   .then((err) => {
-    console.log(err)
+    console.log(err);
   }); */
 
 module.exports = Vehicle;

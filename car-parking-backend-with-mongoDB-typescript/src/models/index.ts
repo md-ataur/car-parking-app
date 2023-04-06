@@ -1,2 +1,1 @@
-import Vehicle from "./vehicle.model";
-export = Vehicle;
+module.exports.Vehicle = require("./vehicle.model");
