@@ -43,9 +43,9 @@ const ShowedData: React.FC = () => {
       if (resData.data.length < 1) {
         setMessage("No data found");
       }
+	  setIsLoading(false);
     };
     fetchData();
-    setIsLoading(false);
   }, []);
 
   /**
